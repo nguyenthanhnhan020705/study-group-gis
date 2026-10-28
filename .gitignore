@@ -218,3 +218,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# WebGIS local-only files (sample fixtures stay versioned)
+.env.*
+!.env.example
+.local-tests/
+.superpowers/
+data/private/
+data/uploads/
+data/exports/
+backend/tmp/
+~$*.xlsx

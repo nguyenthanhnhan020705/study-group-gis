@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WebGIS hỗ trợ giảng viên chia nhóm học tập theo vị trí địa lý của sinh viên.">
+    <title>WebGIS · Nhóm học tập</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css?v=20261026-tall-map-5">
+    <link rel="stylesheet" href="css/intro-image.css?v=20261026-3">
+    <link rel="stylesheet" href="css/map-display.css?v=20261026-1">
+    <script type="importmap">
+      {"imports":{"./js/map.js":"./js/map.js?v=20261028-group-popup-1"}}
+    </script>
+    <script type="module" src="js/app.js?v=20261028-group-popup-1"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Đến nội dung chính</a>
+    <header class="topbar" hidden>
+      <a class="brand" href="./" aria-label="WebGIS — Trang chủ"><span class="brand-icon" aria-hidden="true">◎</span><span>WebGIS<small>NHÓM HỌC TẬP</small></span></a>
+      <div class="connection"><span id="connection-status" role="status" aria-live="polite" data-state="checking">Đang kiểm tra kết nối…</span><button id="retry-connection" type="button">Kiểm tra lại</button></div>
+    </header>
+    <main id="workspace">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">KHÔNG GIAN LÀM VIỆC</p>
+        <h1 id="page-title">Gần nhau hơn.<br>Học cùng nhau tốt hơn.</h1>
+        <p class="intro-description">Tối ưu hóa khoảng cách + Kết nối tri thức.<br>Cân bằng số lượng Nam/Nữ + Kiểm tra kết quả ngay trên bản đồ.</p>
+        <img class="intro-image" src="images/study-group-webgis.jpg" alt="WebGIS chia nhóm học tập: kết nối các vị trí trên bản đồ" width="1024" height="765" decoding="async">
+      </section>
+      <div class="workspace-grid">
+        <section id="map-title" class="map-panel" aria-label="Bản đồ vị trí sinh viên và nhóm học tập">
+          <div id="map" aria-label="Bản đồ tương tác khu vực TP. Hồ Chí Minh"></div>
+          <span id="map-source" hidden>Bản đồ nền</span>
+          <p id="map-status" class="map-status" role="status" aria-live="polite">Đang tải bản đồ…</p>
+          <button id="retry-map" type="button" class="map-retry" hidden>Thử lại bản đồ</button>
+          <div class="map-footer"><span class="empty-dot" aria-hidden="true"></span>Điểm đại diện, không phải vị trí cửa nhà. Nguồn geocoding: <a href="https://www.geoapify.com/">Geoapify</a> / OpenStreetMap.</div>
+        </section>
+      </div>
+      <section class="import-panel" aria-labelledby="import-title">
+        <div class="section-heading"><p class="eyebrow">BƯỚC 01 · NHẬP DỮ LIỆU</p><h2 id="import-title">Danh sách sinh viên</h2></div>
+        <p class="import-help" id="file-help">Chọn file .xlsx, tiêu đề ở dòng 1 của sheet đầu tiên: <strong>Họ và tên</strong>, <strong>Giới tính</strong>, <strong>Nơi ở để học tập</strong>. Mặc định tối đa 5 MiB và 1.000 dòng. Dữ liệu chưa xác minh vị trí.</p>
+        <form id="import-form" class="import-form">
+          <div class="file-field"><label for="student-file">File danh sách sinh viên</label><input id="student-file" name="file" type="file" accept=".xlsx" aria-describedby="file-help"></div>
+          <button id="import-button" class="primary-button" type="submit" disabled>Đọc danh sách</button>
+        </form>
+        <p id="import-status" class="import-status" role="status" aria-live="polite" data-state="idle">Chọn file Excel để bắt đầu.</p>
+        <dl class="import-summary" aria-label="Thống kê dữ liệu nhập">
+          <div><dt>Tổng dòng dữ liệu</dt><dd id="count-total">0</dd></div><div><dt>Nam</dt><dd id="count-male">0</dd></div><div><dt>Nữ</dt><dd id="count-female">0</dd></div><div><dt>Dòng cần sửa</dt><dd id="count-invalid">0</dd></div>
+        </dl>
+        <div id="errors-panel" class="errors-panel" hidden><h3>Cần kiểm tra lại</h3><ul id="import-errors"></ul></div>
+        <p id="student-empty" class="import-help">Danh sách sẽ xuất hiện tại đây sau khi đọc file.</p>
+        <div id="students-table-panel" class="table-scroll" tabindex="0" role="region" aria-label="Danh sách sinh viên, cuộn ngang để xem đủ cột" hidden>
+          <table><caption>Dữ liệu gốc nhập từ Excel — trạng thái xác nhận vị trí ở bước 02</caption><thead><tr><th scope="col">Dòng Excel</th><th scope="col">Họ và tên</th><th scope="col">Giới tính</th><th scope="col">Nơi ở để học tập</th><th scope="col">Trạng thái nhập</th></tr></thead><tbody id="student-rows"></tbody></table>
+        </div>
+      </section>
+      <section class="import-panel" aria-labelledby="location-title">
+        <p class="eyebrow">BƯỚC 02 · ĐỐI CHIẾU TỰ ĐỘNG</p><h2 id="location-title">Vị trí sinh viên trên bản đồ</h2>
+        <p class="import-help">Sau khi đọc Excel, hệ thống tự đối chiếu địa chỉ rõ ràng và đưa điểm đại diện lên bản đồ. Bạn chỉ cần xử lý địa chỉ thiếu hoặc có nhiều kết quả. Với KTX Nông Lâm, ghi rõ cư xá A–E trong địa chỉ hoặc thêm cột Cư xá/Khu vực. Vị trí đại diện không phải vị trí phòng ở; kết quả vẫn có thể kiểm tra và sửa lại.</p>
+        <button id="geocode-all" class="primary-button" type="button" disabled>Đối chiếu lại vị trí còn thiếu</button>
+        <label for="location-filter">Hiển thị địa chỉ</label>
+        <select id="location-filter"><option value="review">Cần xử lý</option><option value="all">Tất cả sinh viên</option></select>
+        <p id="location-progress" role="status" aria-live="polite">Nhập danh sách hợp lệ để bắt đầu.</p>
+        <div id="location-rows"></div>
+        <p id="grouping-readiness" class="import-status" role="status">Chưa đủ vị trí đã xác nhận để chia nhóm.</p>
+      </section>
+      <section id="grouping-panel" class="import-panel" aria-labelledby="grouping-title">
+        <p class="eyebrow">BƯỚC 03 · THIẾT LẬP NHÓM</p><h2 id="grouping-title">Chia nhóm học tập</h2>
+        <p class="import-help">Ưu tiên các thành viên gần nhau và cân bằng quy mô. Số Nam/Nữ là mục tiêu; mọi sinh viên đều được xếp nhóm.</p>
+        <form id="grouping-form" class="grouping-form">
+          <div class="grouping-field"><label for="target-male">Nam/nhóm</label><input id="target-male" type="number" min="0" step="1" value="3" required aria-describedby="grouping-input-help"></div>
+          <div class="grouping-field"><label for="target-female">Nữ/nhóm</label><input id="target-female" type="number" min="0" step="1" value="2" required aria-describedby="grouping-input-help"></div>
+          <div class="grouping-preview">Số nhóm dự kiến<strong id="group-count-preview">—</strong></div>
+          <button id="generate-groups" type="submit" class="primary-button" disabled>Chia nhóm</button>
+        </form>
+        <p id="grouping-input-help" class="import-help">Xác nhận đủ vị trí ở bước 02 để chia nhóm.</p>
+        <p id="grouping-status" class="import-status" role="status" aria-live="polite" data-state="idle">Thiết lập số Nam/Nữ để bắt đầu.</p>
+        <section id="group-results" aria-labelledby="group-results-title" hidden>
+          <p class="eyebrow">BƯỚC 04 · KẾT QUẢ</p><h2 id="group-results-title">Các nhóm học tập</h2>
+          <dl class="import-summary group-summary" aria-label="Thống kê toàn bộ kết quả, không đổi theo bộ lọc">
+            <div><dt>Tổng sinh viên</dt><dd id="group-total">0</dd></div>
+            <div><dt>Tổng số nhóm</dt><dd id="group-total-count">0</dd></div>
+            <div><dt>Khoảng cách TB toàn bộ</dt><dd id="overall-distance">—</dd></div>
+            <div><dt>Khoảng cách lớn nhất</dt><dd id="overall-max-distance">—</dd></div>
+          </dl>
+          <p class="import-help">Khoảng cách đường chim bay Haversine giữa các điểm đại diện. Trung bình toàn bộ tính trên mọi cặp thành viên cùng nhóm, không phải quãng đường hoặc thời gian di chuyển.</p>
+          <div id="group-warnings-panel" class="errors-panel" hidden><h3>Lưu ý về tỷ lệ Nam/Nữ</h3><ul id="group-warnings"></ul></div>
+          <div class="group-filter-bar"><label for="group-filter">Xem nhóm</label><select id="group-filter"><option value="">Tất cả nhóm</option></select><p aria-live="polite">Đang xem <strong id="group-visible">0</strong> sinh viên</p><a href="#map-title">Xem trên bản đồ ↑</a></div>
+          <p id="group-view-label" class="import-help" role="status"></p>
+          <div id="group-legend" class="group-legend" aria-label="Chú giải màu và số nhóm"></div>
+          <p class="import-help">Vòng tròn màu thể hiện vị trí sinh viên theo nhóm; điểm thuộc nhiều nhóm có các vòng màu đồng tâm hoặc viền chia màu. Ghim đen là tâm phân bố nhóm: bấm ghim để xem đầy đủ thành viên. Các tâm trùng nhau dùng ghim chung. Dùng bộ lọc để xem riêng một nhóm.</p>
+          <h3>Thống kê nhóm đang xem</h3>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Thống kê nhóm, cuộn ngang để xem đủ cột"><table class="group-stats-table"><caption>Độ lệch so với mục tiêu Nam/Nữ; khoảng cách tính bằng mét</caption><thead><tr><th scope="col">Nhóm</th><th scope="col">Số người</th><th scope="col">Nam</th><th scope="col">Nữ</th><th scope="col">Lệch mục tiêu</th><th scope="col">Khoảng cách TB</th><th scope="col">Lớn nhất</th></tr></thead><tbody id="group-stats"></tbody></table></div>
+          <h3 class="members-heading">Thành viên đang xem</h3>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Thành viên nhóm, cuộn ngang để xem đủ cột"><table class="group-members-table"><caption>Danh sách khớp các điểm đang hiển thị trên bản đồ</caption><thead><tr><th scope="col">Nhóm</th><th scope="col">Mã sinh viên</th><th scope="col">Họ và tên</th><th scope="col">Giới tính</th><th scope="col">Vị trí đại diện</th></tr></thead><tbody id="group-members"></tbody></table></div>
+          <div id="group-export" class="group-export"><button id="export-groups" type="button" class="primary-button" disabled aria-describedby="export-help">Xuất danh sách nhóm (.xlsx)</button><p id="export-help" class="import-help">Cần chia nhóm với dữ liệu hiện tại trước khi xuất Excel.</p><p id="export-status" class="import-status" role="status" aria-live="polite" data-state="idle">File gồm danh sách và thống kê của toàn bộ nhóm.</p></div>
+        </section>
+      </section>
+      <noscript><p class="notice">Vui lòng bật JavaScript để xem bản đồ và kiểm tra kết nối.</p></noscript>
+    </main>
+    <footer class="page-footer"><span>WebGIS · Hỗ trợ chia nhóm học tập</span><span>Vị trí đại diện · Không yêu cầu số nhà</span></footer>
+  </body>
+</html>

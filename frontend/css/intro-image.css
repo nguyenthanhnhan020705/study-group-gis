@@ -1,0 +1,45 @@
+/* Presentation only: keep the existing text and application controls in place. */
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  grid-template-areas:
+    "eyebrow illustration"
+    "title illustration"
+    "description illustration";
+  column-gap: clamp(24px, 4vw, 56px);
+}
+
+.intro > .eyebrow { grid-area: eyebrow; align-self: end; font-size: 13px; }
+.intro > h1 {
+  grid-area: title;
+  font-family: "Segoe Script", "Snell Roundhand", "Apple Chancery", cursive;
+  font-size: clamp(27px, 3.2vw, 44px);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -1px;
+}
+.intro > .intro-description { grid-area: description; align-self: start; }
+
+.intro-image {
+  grid-area: illustration;
+  align-self: center;
+  justify-self: end;
+  display: block;
+  width: 100%;
+  max-width: calc(380px + 2cm);
+  height: auto;
+  border-radius: 14px;
+}
+
+@media (max-width: 800px) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "eyebrow" "title" "description" "illustration";
+  }
+
+  .intro-image {
+    justify-self: center;
+    max-width: 300px;
+    margin-top: 20px;
+  }
+}

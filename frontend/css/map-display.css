@@ -1,0 +1,11 @@
+/* Give the map the space previously occupied by the explanatory strips. */
+.map-panel .map-footer,
+.map-panel .map-status:not([data-state="error"]) {
+  display: none;
+}
+
+#map { height: 680px; }
+
+@media (max-width: 800px) {
+  #map { height: 530px; }
+}

@@ -1,0 +1,2 @@
+# Optional: only for scripts/check_phase1_browser.py, not backend runtime.
+playwright==1.64.0

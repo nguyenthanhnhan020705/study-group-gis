@@ -1,0 +1,108 @@
+{
+  "source": "Bundled fake student workbook, live Geoapify responses, labels/identities checked against registered public places. No real student residences.",
+  "checked_at_utc": "2026-10-25T01:17:01.147615+00:00",
+  "source_workbook": "data/samples/danh_sach_sinh_vien_bao_cao.xlsx",
+  "snapshot": "data/evaluation/confirmed-sample-30.json",
+  "places": [
+    {
+      "input_address": "Cư xá A, Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh — Cư xá A",
+      "lat": 10.871312,
+      "lon": 106.7911041,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/way/291412044",
+      "address_source_url": "https://ts.hcmuaf.edu.vn/data/file/Tuyen%20sinh%202025/20250718_%20Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20sinh%202025.pdf",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Cư xá C, Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh — Cư xá C",
+      "lat": 10.8712986,
+      "lon": 106.7895796,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/way/291412048",
+      "address_source_url": "https://ts.hcmuaf.edu.vn/data/file/Tuyen%20sinh%202025/20250718_%20Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20sinh%202025.pdf",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Cư xá B, Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh — Cư xá B",
+      "lat": 10.8713036,
+      "lon": 106.7899564,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/way/291412047",
+      "address_source_url": "https://ts.hcmuaf.edu.vn/data/file/Tuyen%20sinh%202025/20250718_%20Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20sinh%202025.pdf",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Cư xá D, Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh — Cư xá D",
+      "lat": 10.8705371,
+      "lon": 106.7891335,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/way/726200672",
+      "address_source_url": "https://ts.hcmuaf.edu.vn/data/file/Tuyen%20sinh%202025/20250718_%20Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20sinh%202025.pdf",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Cư xá E, Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh — Cư xá E",
+      "lat": 10.8704286,
+      "lon": 106.7902651,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/way/609150037",
+      "address_source_url": "https://ts.hcmuaf.edu.vn/data/file/Tuyen%20sinh%202025/20250718_%20Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20sinh%202025.pdf",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Ký túc xá Cỏ May, trong khuôn viên Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá Cỏ May, trong khuôn viên Trường Đại học Nông Lâm Thành phố Hồ Chí Minh, khu phố 33, phường Linh Xuân, Thành phố Hồ Chí Minh — KTX Cỏ May",
+      "lat": 10.8700708,
+      "lon": 106.7901911,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/way/609150034",
+      "address_source_url": "https://ktxcomay.com.vn/",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Ký túc xá khu B Đại học Quốc gia Thành phố Hồ Chí Minh, đường Mạc Đĩnh Chi, khu phố Tân Hòa, phường Đông Hòa, Thành phố Hồ Chí Minh",
+      "label": "Ký túc xá khu B Đại học Quốc gia Thành phố Hồ Chí Minh, đường Mạc Đĩnh Chi, khu phố Tân Hòa, phường Đông Hòa, Thành phố Hồ Chí Minh",
+      "lat": 10.8821432,
+      "lon": 106.7825645,
+      "source": "geoapify_places",
+      "source_url": "https://www.openstreetmap.org/node/11562800202",
+      "address_source_url": "https://www.ktxhcm.edu.vn/",
+      "provider_formatted": null,
+      "confidence": null
+    },
+    {
+      "input_address": "Đường Võ Văn Ngân, phường Thủ Đức, Thành phố Hồ Chí Minh",
+      "label": "Đường Võ Văn Ngân, phường Thủ Đức, Thành phố Hồ Chí Minh",
+      "lat": 10.8496978,
+      "lon": 106.7691507,
+      "source": "geoapify_geocoding",
+      "source_url": null,
+      "address_source_url": "https://chicuccntyhcm.gov.vn/new/2025/12/04/Tram-Chan-nuoi-va-Thu-y-khu-vuc-1.aspx",
+      "provider_formatted": "Vo Van Ngan Street, Phường Thủ Đức, Thủ Đức, 71306, Vietnam",
+      "confidence": 0.81
+    },
+    {
+      "input_address": "Đường Kha Vạn Cân, phường Thủ Đức, Thành phố Hồ Chí Minh",
+      "label": "Đường Kha Vạn Cân, phường Thủ Đức, Thành phố Hồ Chí Minh",
+      "lat": 10.856262,
+      "lon": 106.7564858,
+      "source": "geoapify_geocoding",
+      "source_url": null,
+      "address_source_url": "https://gdnn.tphcm.gov.vn/truong-cao-dang-cong-nghe-tp-ho-chi-minh",
+      "provider_formatted": "Đường Kha Vạn Cân, Phường Thủ Đức, Thủ Đức, 75350, Vietnam",
+      "confidence": 0.81
+    }
+  ],
+  "limitations": "Registry identity and representative-point check only; not a field survey or per-student ground truth. No provider calls during evaluation."
+}

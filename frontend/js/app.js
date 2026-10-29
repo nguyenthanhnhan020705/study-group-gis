@@ -3,6 +3,7 @@ import { initializeMap } from "./map.js";
 import { initializeImport } from "./students.js";
 import { initializeGeocoding } from "./geocoding.js";
 import { initializeGrouping } from "./grouping.js";
+import { initializeWizard } from "./wizard.js";
 
 const status = document.getElementById("connection-status");
 const retry = document.getElementById("retry-connection");
@@ -30,3 +31,4 @@ initializeMap();
 initializeImport();
 initializeGeocoding();
 initializeGrouping();
+initializeWizard();

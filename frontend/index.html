@@ -7,26 +7,36 @@
     <title>WebGIS · Nhóm học tập</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css?v=20261026-tall-map-5">
-    <link rel="stylesheet" href="css/intro-image.css?v=20261026-3">
-    <link rel="stylesheet" href="css/map-display.css?v=20261026-1">
+    <link rel="stylesheet" href="css/wizard.css?v=20261029-1">
+
     <script type="importmap">
-      {"imports":{"./js/map.js":"./js/map.js?v=20261028-group-popup-1"}}
+      {"imports":{"./js/map.js":"./js/map.js?v=20261029-wizard-1"}}
     </script>
-    <script type="module" src="js/app.js?v=20261028-group-popup-1"></script>
+    <script type="module" src="js/app.js?v=20261029-wizard-1"></script>
   </head>
   <body>
     <a class="skip-link" href="#workspace">Đến nội dung chính</a>
-    <header class="topbar" hidden>
+    <header class="topbar">
       <a class="brand" href="./" aria-label="WebGIS — Trang chủ"><span class="brand-icon" aria-hidden="true">◎</span><span>WebGIS<small>NHÓM HỌC TẬP</small></span></a>
       <div class="connection"><span id="connection-status" role="status" aria-live="polite" data-state="checking">Đang kiểm tra kết nối…</span><button id="retry-connection" type="button">Kiểm tra lại</button></div>
     </header>
     <main id="workspace">
       <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">KHÔNG GIAN LÀM VIỆC</p>
-        <h1 id="page-title">Gần nhau hơn.<br>Học cùng nhau tốt hơn.</h1>
-        <p class="intro-description">Tối ưu hóa khoảng cách + Kết nối tri thức.<br>Cân bằng số lượng Nam/Nữ + Kiểm tra kết quả ngay trên bản đồ.</p>
-        <img class="intro-image" src="images/study-group-webgis.jpg" alt="WebGIS chia nhóm học tập: kết nối các vị trí trên bản đồ" width="1024" height="765" decoding="async">
+        <p class="eyebrow">WEBGIS · KẾT NỐI KHÔNG GIAN HỌC TẬP</p>
+        <h1 id="page-title">Chia nhóm gần nhau. Học tập cùng nhau.</h1>
+        <p class="intro-description">Từ danh sách sinh viên đến nhóm học tập phù hợp — qua 4 bước đơn giản.</p>
       </section>
+      <nav id="wizard-nav" class="wizard-nav" aria-label="Các bước chia nhóm">
+        <button type="button" data-step="1" aria-current="step"><b>01</b><span><strong>Nhập dữ liệu</strong><small>Tải mẫu và đọc Excel</small></span></button>
+        <button type="button" data-step="2" disabled><b>02</b><span><strong>Vị trí</strong><small>Đối chiếu trên bản đồ</small></span></button>
+        <button type="button" data-step="3" disabled><b>03</b><span><strong>Chia nhóm</strong><small>Thiết lập quy mô</small></span></button>
+        <button type="button" data-step="4" disabled><b>04</b><span><strong>Kết quả</strong><small>Khám phá và xuất file</small></span></button>
+      </nav>
+      <div id="wizard-actions" class="wizard-actions">
+        <button id="wizard-back" class="secondary-button" type="button" hidden>← Quay lại</button>
+        <p id="wizard-hint" role="status" aria-live="polite"></p>
+        <button id="wizard-next" class="primary-button" type="button" disabled>Tiếp tục: Xác nhận vị trí →</button>
+      </div>
       <div class="workspace-grid">
         <section id="map-title" class="map-panel" aria-label="Bản đồ vị trí sinh viên và nhóm học tập">
           <div id="map" aria-label="Bản đồ tương tác khu vực TP. Hồ Chí Minh"></div>
@@ -38,7 +48,13 @@
       </div>
       <section class="import-panel" aria-labelledby="import-title">
         <div class="section-heading"><p class="eyebrow">BƯỚC 01 · NHẬP DỮ LIỆU</p><h2 id="import-title">Danh sách sinh viên</h2></div>
-        <p class="import-help" id="file-help">Chọn file .xlsx, tiêu đề ở dòng 1 của sheet đầu tiên: <strong>Họ và tên</strong>, <strong>Giới tính</strong>, <strong>Nơi ở để học tập</strong>. Mặc định tối đa 5 MiB và 1.000 dòng. Dữ liệu chưa xác minh vị trí.</p>
+        <div class="template-card">
+          <div><h3>Bắt đầu với file Excel mẫu</h3><p>Tải mẫu, điền danh sách từ dòng 2 và tải lên để hệ thống kiểm tra.</p>
+          <div class="template-columns"><span>Họ và tên</span><span>Giới tính</span><span>Nơi ở để học tập</span><span>Cư xá/Khu vực</span></div>
+          <p>Cột Giới tính chọn Nam/Nữ. Cư xá/Khu vực có thể để trống nếu ở nhà riêng.</p></div>
+          <a id="download-template" class="primary-button template-download" href="templates/danh-sach-sinh-vien.xlsx" download>Tải Excel mẫu ↓</a>
+        </div>
+        <p class="import-help" id="file-help">Giữ nguyên tiêu đề ở dòng 1 của sheet đầu tiên. Điền đủ họ tên, giới tính và nơi ở. File .xlsx, tối đa 5 MiB và 1.000 sinh viên. Hướng dẫn và ví dụ có trong sheet Hướng dẫn.</p>
         <form id="import-form" class="import-form">
           <div class="file-field"><label for="student-file">File danh sách sinh viên</label><input id="student-file" name="file" type="file" accept=".xlsx" aria-describedby="file-help"></div>
           <button id="import-button" class="primary-button" type="submit" disabled>Đọc danh sách</button>

@@ -7,6 +7,14 @@ let pendingLocations = [];
 let pendingFit = false;
 let groupLegend = null;
 
+window.addEventListener("wizard-map-visible", () => {
+  if (!activeMap) return;
+  activeMap.invalidateSize({ pan: false });
+  if (pendingLocations.length) {
+    activeMap.fitBounds(pendingLocations.map(point => [point.lat, point.lon]), { padding: [35, 45], maxZoom: 15, animate: false });
+  }
+});
+
 const groupColors = ["#008dba", "#e626b9", "#65b600", "#8552df", "#dc9518", "#16834b", "#e34d54", "#4169df", "#008b86", "#a04ca6", "#795230", "#445e28"];
 
 export function groupColor(id) {

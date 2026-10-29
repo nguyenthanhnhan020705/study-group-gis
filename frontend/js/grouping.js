@@ -170,6 +170,7 @@ export function initializeGrouping() {
     // A retry replaces the previous result, even when the next request fails.
     state.groupingResult = null;
     state.selectedGroup = null;
+    window.dispatchEvent(new Event("grouping-changed"));
     const revision = state.groupingRevision;
     const controller = new AbortController();
     activeRequest = controller;

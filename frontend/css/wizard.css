@@ -1,0 +1,61 @@
+:root { --paper: #f3f6f5; --ink: #163d34; --muted: #526b63; }
+body { font-size: 15px; }
+.topbar { padding: 16px max(4%, calc((100% - 1320px)/2)); }
+main { max-width: 1400px; padding: 30px 4%; }
+.intro { display: block; min-height: 0; padding: 0; margin: 0 0 24px; background: none; }
+.intro h1 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -.8px; margin-bottom: 8px; }
+.intro-description { max-width: none; }
+.wizard-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 24px 0; scroll-margin-top: 16px; }
+.wizard-nav button { display: flex; align-items: center; gap: 12px; text-align: left; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: #fff; color: var(--muted); }
+.wizard-nav b { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; background: #edf2ef; font-size: 13px; }
+.wizard-nav strong { display: block; font-size: 15px; }
+.wizard-nav small { display: block; margin-top: 3px; font-size: 12px; }
+.wizard-nav button[aria-current] { color: #fff; background: var(--green); border-color: var(--green); box-shadow: 0 5px 16px #17634a20; }
+.wizard-nav button[aria-current] b { background: #ffffff24; }
+.wizard-nav button:disabled { cursor: not-allowed; background: #e9eeeb; color: #63766f; }
+.wizard-nav button[data-complete="true"]:not([aria-current]) b { background: #dcefe3; color: #17634a; }
+.wizard-step > .import-panel { margin-top: 0; }
+.wizard-step .workspace-grid { margin-bottom: 24px; }
+.import-panel { padding: 28px; box-shadow: 0 3px 15px #163d3405; }
+h2 { font-size: 24px; }
+h3 { font-size: 16px; }
+.eyebrow { font-size: 11px; }
+.import-help, .import-status, #location-progress { font-size: 14px; }
+.template-card { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 24px; margin: 24px 0 18px; border: 1px solid #bdd8c9; border-radius: 12px; background: #f0f8f3; }
+.template-card h3 { font-size: 18px; margin: 0 0 8px; }
+.template-card p { margin: 0; line-height: 1.7; color: var(--muted); }
+.template-download { display: inline-block; white-space: nowrap; text-decoration: none; }
+.template-columns { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.template-columns span { background: #fff; border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 13px; }
+.file-field { padding: 20px; background: #f8faf9; border: 1px dashed #9ab7a8; border-radius: 10px; }
+input[type="file"] { background: white; padding: 12px; }
+input::file-selector-button { border: 0; border-radius: 5px; padding: 9px 12px; background: #e5efe9; color: #163d34; cursor: pointer; margin-right: 12px; }
+.primary-button { min-height: 46px; border-radius: 8px; }
+.primary-button:not(:disabled):hover { background: #104d39; }
+.import-summary div { background: #f8faf9; padding: 18px; }
+.table-scroll { max-height: 430px; overflow: auto; }
+th { position: sticky; top: 0; z-index: 1; background: #edf3ef; }
+td { line-height: 1.6; }
+tbody tr:nth-child(even) { background: #f8faf9; }
+.wizard-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 22px 0; }
+#wizard-hint { flex: 1; min-width: 220px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.secondary-button { padding: 12px 18px; border: 1px solid #b5c5ba; border-radius: 8px; background: white; color: var(--ink); min-height: 46px; }
+#group-results { margin: 0; padding: 28px; border: 1px solid var(--border); }
+#map { height: 440px; }
+.map-panel .map-footer { display: flex; }
+.map-panel .map-status { display: block; }
+#location-filter { padding: 10px; border-radius: 6px; border: 1px solid var(--border); font: inherit; margin: 10px; }
+:focus-visible { outline: 3px solid #bc8422; outline-offset: 4px; }
+@media(max-width: 760px) {
+  .wizard-nav { grid-template-columns: repeat(2, 1fr); }
+  .wizard-nav button { padding: 12px; gap: 8px; }
+  .wizard-nav small { display: none; }
+  .template-card { flex-direction: column; align-items: stretch; padding: 18px; }
+  .template-download { text-align: center; white-space: normal; }
+  .import-panel, #group-results { padding: 18px; }
+  .wizard-actions .primary-button { width: 100%; }
+  #map { height: 350px; }
+  .topbar { align-items: flex-start; }
+  .connection { font-size: 12px; gap: 8px; }
+}
+@media(prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
